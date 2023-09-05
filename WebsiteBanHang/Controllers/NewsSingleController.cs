@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace WebsiteBanHang.Controllers
 {
-    public class HomeController : Controller
+    public class NewsSingleController : Controller
     {
+        // GET: NewsSingle
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }
