@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using WebsiteBanHang.Context
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -54,8 +55,17 @@
                         <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> info@mydomain.com</a>
                     </div>
                     <div class="col-lg-3 text-right">
-                        <a href="login.html" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
-                        <a href="register.html" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>
+                        @if (Session["idUser"] != null)
+                        {
+                            <a href="~/Cart/Index" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span>Giỏ Hàng</a>
+                            <a href="~/Admin/Home" class="small mr-3"><span class="icon-unlock-alt"></span>Trang quản trị</a>
+                            <a href="~/Home/Logout" class="small mr-3"><span class="icon-unlock-alt"></span>Logout</a>
+                        }
+                        else
+                        {
+                            <a href="~/Home/Login" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
+                            <a href="~/Home/Register" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -66,7 +76,7 @@
                 <div class="d-flex align-items-center">
                     <div class="site-logo">
                         <a href="index.html" class="d-block">
-                            
+
                             <img src="~/Content/images/logo.jpg" alt="Image" class="img-fluid">
                         </a>
                     </div>
@@ -74,25 +84,32 @@
                         <nav class="site-navigation position-relative text-right" role="navigation">
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                                 <li class="active">
-                                    <a href="index.html" class="nav-link text-left">Home</a>
+                                    <a href="~/" class="nav-link text-left">Trang chủ</a>
                                 </li>
                                 <li class="has-children">
-                                    <a href="about.html" class="nav-link text-left">About Us</a>
+                                    <a href="~/ListingGrid/" class="nav-link text-left">Thương hiệu</a>
                                     <ul class="dropdown">
-                                        <li><a href="teachers.html">Our Teachers</a></li>
-                                        <li><a href="about.html">Our School</a></li>
+                                        @using (var db = new WebBanHangEntities())
+                                        {
+                                            var categories = db.Categories.ToList();
+                                            foreach (var category in categories)
+                                            {
+                                                <li><a href="~/ListingGrid/">@category.Name</a></li>
+                                            }
+                                        }
                                     </ul>
+
                                 </li>
                                 <li>
-                                    <a href="admissions.html" class="nav-link text-left">Admissions</a>
+                                    <a href="admissions.html" class="nav-link text-left">Danh mục</a>
                                 </li>
                                 <li>
-                                    <a href="courses.html" class="nav-link text-left">Courses</a>
+                                    <a href="courses.html" class="nav-link text-left">Tài khoản</a>
                                 </li>
                                 <li>
-                                    <a href="contact.html" class="nav-link text-left">Contact</a>
+                                    <a href="contact.html" class="nav-link text-left">Liện hệ</a>
                                 </li>
-                            </ul>                                                                                                                                                                                                                                                                                          </ul>
+                            </ul>
                         </nav>
 
                     </div>

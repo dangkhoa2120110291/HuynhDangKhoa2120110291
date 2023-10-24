@@ -4,18 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebsiteBanHang.Context;
-using WebsiteBanHang.Models;
 
 namespace WebsiteBanHang.Controllers
 {
-    public class ProductController : Controller
+    public class CartController : Controller
     {
         WebBanHangEntities obj = new WebBanHangEntities();
-        // GET: Product
+        // GET: Cart
         public ActionResult Detail(int id)
         {
             var objProduct = obj.Products.Where(n => n.Id == id).FirstOrDefault();
-            return View(objProduct);
+            return View(objProduct);          
         }
     }
 }
