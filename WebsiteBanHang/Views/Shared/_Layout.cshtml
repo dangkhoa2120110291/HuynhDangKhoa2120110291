@@ -50,21 +50,21 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-9 d-none d-lg-block">
-                        <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Have a questions?</a>
-                        <a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> 10 20 123 456</a>
-                        <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> info@mydomain.com</a>
+                        <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Bạn có câu hỏi?</a>
+                        <a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> 0931 203 116</a>
+                        <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> huynhdangkhoa080102@gmail.com</a>
                     </div>
                     <div class="col-lg-3 text-right">
                         @if (Session["idUser"] != null)
                         {
                             <a href="~/Cart/Index" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span>Giỏ Hàng</a>
                             <a href="~/Admin/Home" class="small mr-3"><span class="icon-unlock-alt"></span>Trang quản trị</a>
-                            <a href="~/Home/Logout" class="small mr-3"><span class="icon-unlock-alt"></span>Logout</a>
+                            <a href="~/Home/Logout" class="small mr-3"><span class="icon-unlock-alt"></span>Đăng xuất</a>
                         }
                         else
                         {
-                            <a href="~/Home/Login" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
-                            <a href="~/Home/Register" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>
+                            <a href="~/Home/Login" class="small mr-3"><span class="icon-unlock-alt"></span> Đăng nhập</a>
+                            <a href="~/Home/Register" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span>Đăng ký</a>
                         }
                     </div>
                 </div>
@@ -87,27 +87,25 @@
                                     <a href="~/" class="nav-link text-left">Trang chủ</a>
                                 </li>
                                 <li class="has-children">
-                                    <a href="~/ListingGrid/" class="nav-link text-left">Thương hiệu</a>
+                                    <a href="" class="nav-link text-left">Thương hiệu</a>
                                     <ul class="dropdown">
                                         @using (var db = new WebBanHangEntities())
                                         {
-                                            var categories = db.Categories.ToList();
-                                            foreach (var category in categories)
+                                            var brands = db.Brands.ToList();
+                                            foreach (var brand in brands)
                                             {
-                                                <li><a href="~/ListingGrid/">@category.Name</a></li>
+                                                <li><a href="@Url.Action("Index", "ListingGrid", new { BrandId = brand.Id })">@brand.Name</a></li>
                                             }
                                         }
+
                                     </ul>
 
-                                </li>
-                                <li>
-                                    <a href="admissions.html" class="nav-link text-left">Danh mục</a>
                                 </li>
                                 <li>
                                     <a href="courses.html" class="nav-link text-left">Tài khoản</a>
                                 </li>
                                 <li>
-                                    <a href="contact.html" class="nav-link text-left">Liện hệ</a>
+                                    <a href="@Url.Action("Index","Cart")" class="nav-link text-left">Giỏ hàng</a>
                                 </li>
                             </ul>
                         </nav>

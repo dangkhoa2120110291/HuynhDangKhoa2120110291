@@ -7,7 +7,9 @@ namespace WebsiteBanHang.Models
 {
     public class HomeModel
     {
-        public List<Product> ListProduct { get; set; }
-        public List<Category> ListCategory { get; set; }
+        public Product Product { get; set; }
+        public List<WebsiteBanHang.Context.Product> ListProduct { get; set; }
+        public List<WebsiteBanHang.Context.Category> ListCategory { get; set; }
+        public List<WebsiteBanHang.Context.Brand> ListBrand { get; set; }
     }
 }

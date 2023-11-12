@@ -84,26 +84,65 @@
             <div class="row">
                 @foreach (var item in Model.ListProduct)
                 {
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-6">
-                        <div class="card card-product-grid">
-                            <a href="@Url.Action("Detail", "Product", new { @id = item.Id })" class="img-wrap">
-                                <img src="~/Content/images/course_1.jpg" style="width: 100%; height: auto;" />
-                            </a>
-                            <figcaption class="info-wrap">
-                                <div>
-                                    <a href="#" class="text-muted">
-                                        @item.Name
-                                    </a>
-                                </div>
-                                <div class="price h5 mt-2">
-                                    <a href="#" class="price">
-                                        @item.Price$
-                                    </a>
-                                </div>
-                            </figcaption>
+                    // Get the categoryId and brandId from the query string
+                    var categoryIdString = Request.QueryString["categoryId"];
+                    var brandIdString = Request.QueryString["brandId"];
+
+                    // Try to parse categoryIdString and brandIdString to int
+                    if (int.TryParse(categoryIdString, out var categoryId) &&
+                        (!item.CategoryId.HasValue || item.CategoryId.Value == categoryId))
+                    {
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-6">
+                            <div class="card card-product-grid">
+                                <a href="@Url.Action("Detail", "Product", new { @id = item.Id })" class="img-wrap">
+                                    <img src="~/Content/images/@item.Avatar" width="253" height="250" />
+                                </a>
+                                <figcaption class="info-wrap">
+                                    <div>
+                                        <a href="#" class="text-muted">
+                                            @item.Name
+                                        </a>
+                                    </div>
+                                    <div class="price h5 mt-2">
+                                        <a href="#" class="price">
+                                            @item.Price$
+                                        </a>
+                                    </div>
+                                </figcaption>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else if (int.TryParse(brandIdString, out var brandId) && item.BrandId == brandId)
+                    {
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-6">
+                            <div class="card card-product-grid">
+                                <a href="@Url.Action("Detail", "Product", new { @id = item.Id })" class="img-wrap">
+                                    <img src="~/Content/images/@item.Avatar" width="253" height="250" />
+                                </a>
+                                <figcaption class="info-wrap">
+                                    <div>
+                                        <a href="#" class="text-muted">
+                                            @item.Name
+                                        </a>
+                                    </div>
+                                    <div class="price h5 mt-2">
+                                        <a href="#" class="price">
+                                            @item.Price$
+                                        </a>
+                                    </div>
+                                </figcaption>
+                            </div>
+                        </div>
+                    }                    
                 }
             </div>
         </section>
+
+
+
+
+
+
+
+
 </section>

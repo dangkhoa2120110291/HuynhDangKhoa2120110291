@@ -15,11 +15,13 @@ namespace WebsiteBanHang.Controllers
         {
             var lstProduct = obj.Products.ToList();
             var lstCategory = obj.Categories.ToList();
+            var lstBrand = obj.Brands.ToList();
 
             Models.HomeModel objHome = new Models.HomeModel();
 
             objHome.ListProduct = lstProduct;
             objHome.ListCategory = lstCategory;
+            objHome.ListBrand = lstBrand;
             return View(objHome);
         }
     }

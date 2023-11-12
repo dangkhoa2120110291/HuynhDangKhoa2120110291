@@ -3,10 +3,36 @@
 @{
     ViewBag.Title = "Detail";
 }
-
-
-<h2>Detail</h2>
-<h2>Detail</h2>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = @Model.Id;
+            // lấy số lượng đặt hàng
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!")
+                    $('#CartCount').text(@Session["count"] + 1);
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+    </script>
+<br/>
+<br />
 
 @*<div>
     <h4>Sản Phẩm</h4>
@@ -48,7 +74,7 @@
             <div class="col-md-6 mb-4">
                 <p>
 
-                    <img src="~/Content/images/course_5.jpg" alt="Image" class="img-fluid">
+                    <img src="~/Content/images/@Html.DisplayFor(model => model.Avatar)" alt="Image" class="img-fluid">
                 </p>
             </div>
             <div class="col-lg-5 ml-auto align-self-center">
@@ -59,7 +85,13 @@
                 <p><strong class="text-black d-block">@Html.DisplayNameFor(model => model.Price)</strong> @Html.DisplayFor(model => model.Price)</p>
 
                 <p>
-                    <a href="@Url.Action("Detail", "Cart", new { id = Model.Id })" class="btn btn-primary rounded-0 btn-lg px-5">Thêm vào giỏ hàng</a>
+                    <div class="form-group col-md flex-grow-0">
+                        <div class="input-group mb-3 input-spinner">
+                            <input type="text" id="ipQuantity" class="form-control" value="1">
+                            <a href="" id="addtocart" class="btn btn-primary rounded-0 btn-lg px-5">Thêm vào giỏ hàng</a>
+                        </div>
+                    </div>
+                    
 
                 </p>
             </div>
